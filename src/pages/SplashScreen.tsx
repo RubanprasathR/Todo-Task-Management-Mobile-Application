@@ -20,7 +20,7 @@ const SplashScreen = () => {
   }, [user, navigate]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-primary">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-hero">
       <div className="text-center animate-bounce-in">
         <div className="mb-8">
           <img 

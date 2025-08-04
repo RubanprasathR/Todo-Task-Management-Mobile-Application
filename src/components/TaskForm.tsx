@@ -141,7 +141,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ task, onSave, onCancel }) => {
             </div>
 
             <div className="flex gap-2 pt-4">
-              <Button type="submit" className="flex-1 bg-gradient-primary hover:opacity-90">
+              <Button type="submit" className="flex-1">
                 <Save className="mr-2 h-4 w-4" />
                 {task ? 'Update Task' : 'Add Task'}
               </Button>

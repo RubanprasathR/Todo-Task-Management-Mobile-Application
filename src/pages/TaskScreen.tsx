@@ -97,7 +97,7 @@ const TaskScreen = () => {
         }
       </p>
       {type === 'open' && (
-        <Button onClick={handleAddTask} className="bg-gradient-primary hover:opacity-90">
+        <Button onClick={handleAddTask}>
           <Plus className="mr-2 h-4 w-4" />
           Add Your First Task
         </Button>
