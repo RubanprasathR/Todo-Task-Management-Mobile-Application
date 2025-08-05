@@ -76,6 +76,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       
       setUser(mockUser);
       localStorage.setItem('todo-user', JSON.stringify(mockUser));
+      // Save Google email as recent login email
+      localStorage.setItem('recentLoginEmail', mockUser.email);
     } finally {
       setIsLoading(false);
     }
