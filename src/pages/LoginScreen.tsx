@@ -19,6 +19,7 @@ const LoginScreen = () => {
     e.preventDefault();
     try {
       await login(email, password);
+      localStorage.setItem('hasSeenWelcome', 'true');
       navigate('/tasks');
       toast({
         title: "Welcome back!",
@@ -36,6 +37,7 @@ const LoginScreen = () => {
   const handleGoogleLogin = async () => {
     try {
       await loginWithGoogle();
+      localStorage.setItem('hasSeenWelcome', 'true');
       navigate('/tasks');
       toast({
         title: "Welcome!",

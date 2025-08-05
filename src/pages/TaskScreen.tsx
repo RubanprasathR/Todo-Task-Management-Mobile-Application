@@ -110,7 +110,14 @@ const TaskScreen = () => {
       {/* Header */}
       <header className="bg-card shadow-sm border-b">
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-foreground">My Tasks</h1>
+          <div className="flex items-center gap-4">
+            <h1 className="text-2xl font-bold text-foreground">My Tasks</h1>
+            <div className="bg-primary/10 px-3 py-1 rounded-full">
+              <span className="text-sm font-medium text-primary">
+                {openTasks.length} active
+              </span>
+            </div>
+          </div>
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">
               <Avatar className="h-8 w-8">

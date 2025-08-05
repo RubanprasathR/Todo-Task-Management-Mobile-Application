@@ -12,7 +12,13 @@ const SplashScreen = () => {
       if (user) {
         navigate('/tasks');
       } else {
-        navigate('/login');
+        // Check if user has seen welcome page
+        const hasSeenWelcome = localStorage.getItem('hasSeenWelcome');
+        if (hasSeenWelcome) {
+          navigate('/login');
+        } else {
+          navigate('/welcome');
+        }
       }
     }, 2000);
 

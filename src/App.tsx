@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { TaskProvider } from "@/contexts/TaskContext";
 import SplashScreen from "./pages/SplashScreen";
+import WelcomePage from "./pages/WelcomePage";
 import LoginScreen from "./pages/LoginScreen";
 import TaskScreen from "./pages/TaskScreen";
 import NotFound from "./pages/NotFound";
@@ -22,6 +23,7 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<SplashScreen />} />
+              <Route path="/welcome" element={<WelcomePage />} />
               <Route path="/login" element={<LoginScreen />} />
               <Route path="/tasks" element={<TaskScreen />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
