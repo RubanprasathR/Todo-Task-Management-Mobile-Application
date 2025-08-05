@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -196,9 +196,21 @@ const LoginScreen = () => {
             )}
           </Button>
 
-          <p className="text-center text-sm text-muted-foreground">
-            Demo app - any email/password works for testing
-          </p>
+          <div className="text-center space-y-4">
+            <p className="text-center text-sm text-muted-foreground">
+              Demo app - any email/password works for testing
+            </p>
+            
+            <div className="flex items-center justify-center gap-2 text-sm">
+              <span className="text-muted-foreground">Don't have an account?</span>
+              <Link 
+                to="/signup" 
+                className="text-primary hover:underline font-medium"
+              >
+                Sign up
+              </Link>
+            </div>
+          </div>
         </CardContent>
       </Card>
     </div>

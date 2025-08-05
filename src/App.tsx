@@ -8,6 +8,7 @@ import { TaskProvider } from "@/contexts/TaskContext";
 import SplashScreen from "./pages/SplashScreen";
 import WelcomePage from "./pages/WelcomePage";
 import LoginScreen from "./pages/LoginScreen";
+import SignupScreen from "./pages/SignupScreen";
 import TaskScreen from "./pages/TaskScreen";
 import NotFound from "./pages/NotFound";
 
@@ -25,6 +26,7 @@ const App = () => (
               <Route path="/" element={<SplashScreen />} />
               <Route path="/welcome" element={<WelcomePage />} />
               <Route path="/login" element={<LoginScreen />} />
+              <Route path="/signup" element={<SignupScreen />} />
               <Route path="/tasks" element={<TaskScreen />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />

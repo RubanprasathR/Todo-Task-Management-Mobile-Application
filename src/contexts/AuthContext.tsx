@@ -10,6 +10,7 @@ interface User {
 interface AuthContextType {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
+  signup: (name: string, email: string, password: string) => Promise<void>;
   loginWithGoogle: () => Promise<void>;
   logout: () => void;
   isLoading: boolean;
@@ -61,6 +62,26 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const signup = async (name: string, email: string, password: string): Promise<void> => {
+    setIsLoading(true);
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1200));
+      
+      const mockUser: User = {
+        id: Date.now().toString(),
+        name,
+        email,
+        picture: `https://api.dicebear.com/7.x/avataaars/svg?seed=${email}`
+      };
+      
+      setUser(mockUser);
+      localStorage.setItem('todo-user', JSON.stringify(mockUser));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const loginWithGoogle = async (): Promise<void> => {
     setIsLoading(true);
     try {
@@ -91,6 +112,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const value = {
     user,
     login,
+    signup,
     loginWithGoogle,
     logout,
     isLoading
