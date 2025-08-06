@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTask, Task } from '@/contexts/TaskContext';
 import { Button } from '@/components/ui/button';
@@ -8,10 +9,11 @@ import { FloatingActionButton } from '@/components/ui/floating-action-button';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import TaskCard from '@/components/TaskCard';
 import TaskForm from '@/components/TaskForm';
-import { Plus, LogOut, CheckCircle2, Circle, ListTodo } from 'lucide-react';
+import { Plus, LogOut, CheckCircle2, Circle, ListTodo, Settings } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const TaskScreen = () => {
+  const navigate = useNavigate();
   const { user, logout } = useAuth();
   const { openTasks, completedTasks, addTask, updateTask, deleteTask, toggleTask } = useTask();
   const [showTaskForm, setShowTaskForm] = useState(false);
@@ -72,6 +74,7 @@ const TaskScreen = () => {
 
   const handleLogout = () => {
     logout();
+    navigate('/login');
     toast({
       title: "Logged out",
       description: "You have been successfully logged out.",
@@ -118,8 +121,13 @@ const TaskScreen = () => {
               </span>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => navigate('/profile')}
+              className="flex items-center gap-2"
+            >
               <Avatar className="h-8 w-8">
                 <AvatarImage src={user?.picture} alt={user?.name} />
                 <AvatarFallback>
@@ -129,7 +137,8 @@ const TaskScreen = () => {
               <span className="text-sm font-medium hidden sm:inline">
                 {user?.name}
               </span>
-            </div>
+              <Settings className="h-4 w-4 hidden sm:inline" />
+            </Button>
             <AlertDialog>
               <AlertDialogTrigger asChild>
                 <Button variant="outline" size="sm">
