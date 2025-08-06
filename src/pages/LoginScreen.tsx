@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -6,36 +6,24 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import { Copy, Mail } from 'lucide-react';
 import todoLogo from '@/assets/todo-logo.png';
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [recentEmail, setRecentEmail] = useState('');
   const { login, loginWithGoogle, isLoading } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
-
-  useEffect(() => {
-    // Load recent email from localStorage
-    const savedEmail = localStorage.getItem('recentLoginEmail');
-    if (savedEmail) {
-      setRecentEmail(savedEmail);
-    }
-  }, []);
 
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       await login(email, password);
-      // Save email to localStorage for future reference
-      localStorage.setItem('recentLoginEmail', email);
       localStorage.setItem('hasSeenWelcome', 'true');
       navigate('/tasks');
       toast({
         title: "Welcome back!",
-        description: `Logged in as ${email}`,
+        description: `Logged in successfully`,
       });
     } catch (error) {
       toast({
@@ -53,7 +41,7 @@ const LoginScreen = () => {
       navigate('/tasks');
       toast({
         title: "Welcome!",
-        description: "Successfully logged in with john.doe@gmail.com",
+        description: "Successfully logged in with Google",
       });
     } catch (error) {
       toast({
@@ -61,26 +49,6 @@ const LoginScreen = () => {
         description: "Google login failed. Please try again.",
         variant: "destructive",
       });
-    }
-  };
-
-  const copyRecentEmail = async () => {
-    if (recentEmail) {
-      try {
-        await navigator.clipboard.writeText(recentEmail);
-        setEmail(recentEmail);
-        toast({
-          title: "Email copied",
-          description: `${recentEmail} has been pasted to the email field`,
-        });
-      } catch (error) {
-        // Fallback for older browsers
-        setEmail(recentEmail);
-        toast({
-          title: "Email filled",
-          description: `${recentEmail} has been added to the email field`,
-        });
-      }
     }
   };
 
@@ -101,27 +69,6 @@ const LoginScreen = () => {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
-          {/* Recent Email Quick Access */}
-          {recentEmail && (
-            <div className="bg-muted/30 rounded-lg p-3 border border-muted">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-muted-foreground" />
-                  <span className="text-sm text-muted-foreground">Recent login:</span>
-                  <span className="text-sm font-medium">{recentEmail}</span>
-                </div>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={copyRecentEmail}
-                  className="h-8 px-2"
-                >
-                  <Copy className="w-3 h-3" />
-                </Button>
-              </div>
-            </div>
-          )}
-
           <form onSubmit={handleEmailLogin} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
